@@ -67,7 +67,7 @@ modules:
         - nautilus
 
         # Network
-        - networkmanager
+        - NetworkManager
         - xdg-desktop-portal-hyprland
         - matugen
 
