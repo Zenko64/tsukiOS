@@ -34,7 +34,7 @@ modules:
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
       copr:
-        - "lionheartp/hyprland"
+        - lionheartp/hyprland
 
     # Packages That Should Be Installed
     install:
@@ -43,13 +43,20 @@ modules:
         - ags
         - astal
         - swww
-        - repo: lionheartp/hyprland
-          packages:
-            - hyprland
-            - hypridle
-            - hyprlock
-            - hyprqt6engine
-            - hyprcursor
+
+        # Hyprland
+        - hyprland
+        - hypridle
+        - hyprlock
+        - hyprcursor
+        - hyprshot
+
+        # Theming
+        - kvantum
+        - nwg-look
+        - nwg-displays
+        - qt5ct
+        - qt6ct
 
         # Management
         - ghostty
@@ -61,11 +68,21 @@ modules:
         - mopidy
         - mopidy-mpd
 
-        # Tools
+        # System Tools
         - uv
+        - git
+        - curl
+        - wget
+        - unzip
+
+        # Fun Tools
+        - fastfetch
+        - cava
+        - ncmpcpp
 
         # Utilities
-        - nautilus
+        - nautilus # File Manager
+        - satty # Screenshot
 
         # Network
         - NetworkManager
