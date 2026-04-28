@@ -33,22 +33,27 @@ modules:
     repos:
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+      copr:
+        - lionheartp/hyprland
 
     # Packages That Should Be Installed
     install:
       packages:
         # Ui/UX
-        - hyprland
         - ags
         - astal
         - swww
 
+        - repo: lionheartp/hyprland
+          packages:
+            - hyprland
+            - hypridle
+            - hyprlock
+            - hyprqt6engine
+            - hyprcursor
+
         # Management
         - ghostty
-        - hypridle
-        - hyprlock
-        - hyprqt6engine
-        - hyprcursor
 
         # Audio
         - pipewire
