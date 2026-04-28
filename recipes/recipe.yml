@@ -20,7 +20,6 @@ modules:
   # Add RPMFusion
   - type: bling
     install:
-      - rpmfusion
       - dconf-update-service
 
   # Install Brew
