@@ -1,13 +1,13 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/<user>/<name>
-name: tsukiOS
+name: tsuki-os
 # description will be included in the image's metadata
-description: This is my personal OS image.
+description: Simi's Custom Atomic Hyprland Rice.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/base-nvidia
+image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -17,14 +17,63 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+  # Add RPMFusion
+  - type: bling
+    install:
+      - rpmfusion
+      - dconf-update-service
+
+  # Install Brew
+  - type: brew
+    nofile-limits: true
+    brew-analytics: false
+
+  # Initial Package Management
   - type: dnf
     repos:
-      copr:
-        - atim/starship
+      files:
+        - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+
+    # Packages That Should Be Installed
     install:
       packages:
-        - micro
+        # Ui/UX
+        - hyprland
+        - ags
+        - astal
+        - swww
+
+        # Management
+        - ghostty
+        - hypridle
+        - hyprlock
+        - hyprqt6engine
+        - hyprcursor
+
+        # Audio
+        - pipewire
+        - pipewire-pulseaudio
+        - wireplumber
+        - mopidy
+        - mopidy-mpd
+        - mopidy
+
+        # Tools
+        - uv
+
+        # Utilities
+        - nautilus
+
+        # Network
+        - networkmanager
+        - xdg-desktop-portal-hyprland
+        - matugen
+
+        # Terminal Experience
         - starship
+        - neovim
+
+    # Packages That Should Be Removed
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)
@@ -32,14 +81,36 @@ modules:
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
+  # Default Flatpaks
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
         scope: system
         # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
+        # install: # system flatpaks we want all users to have and not remove
+
+      - scope: user # Also add Flathub user repo, but no user packages
+
+  - type: default-flatpaks
+    configurations:
+      - notify: true
+        scope: user
+        # FlatHub is used by default.
+        install:
           - org.mozilla.firefox
           - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
+
+          # Gaming Utilities
+          - com.valvesoftware.Steam
+          - com.vysp3r.ProtonPlus
+
+          # Communication Utilities
+          - com.discordapp.Discord
+
+          # Media
+          - com.spotify.Client
+
+          # Tools
+          - com.visualstudio.code
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
