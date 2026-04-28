@@ -33,8 +33,6 @@ modules:
     repos:
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
-      copr:
-        - lionheartp/hyprland
 
     # Packages That Should Be Installed
     install:
@@ -61,7 +59,6 @@ modules:
         - wireplumber
         - mopidy
         - mopidy-mpd
-        - mopidy
 
         # Tools
         - uv
