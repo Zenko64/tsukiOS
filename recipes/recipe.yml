@@ -54,7 +54,6 @@ modules:
         # Theming
         - kvantum
         - nwg-look
-        - nwg-displays
         - qt5ct
         - qt6ct
 
