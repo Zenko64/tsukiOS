@@ -33,6 +33,8 @@ modules:
     repos:
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+      copr:
+        - "lionheartp/hyprland"
 
     # Packages That Should Be Installed
     install:
@@ -41,7 +43,6 @@ modules:
         - ags
         - astal
         - swww
-
         - repo: lionheartp/hyprland
           packages:
             - hyprland
